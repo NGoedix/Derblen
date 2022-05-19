@@ -19,7 +19,7 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
 
         Icon icon;
         if (leaf) {
-            Image originalImage = new ImageIcon("./src/main/resources/icons/manual.png").getImage();
+            Image originalImage = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/import.png")).getImage();
             Image resizedImage = originalImage.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
             icon = new ImageIcon(resizedImage);
         } else if (expanded) {
@@ -49,21 +49,6 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
     public void updateUI() {
         super.updateUI();
         setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
-        if ((getLeafIcon() instanceof UIResource)) {
-            Image imgHelpManual = new ImageIcon("./src/main/resources/icons/manual.png").getImage();
-            Image resizedHelpManual = imgHelpManual.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-            setLeafIcon(new ImageIcon(resizedHelpManual));
-        }
-        if ((getClosedIcon() instanceof UIResource)) {
-            Image imgHelpManual = new ImageIcon("./src/main/resources/icons/manual.png").getImage();
-            Image resizedHelpManual = imgHelpManual.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-            setClosedIcon(new ImageIcon(resizedHelpManual));
-        }
-        if ((getOpenIcon() instanceof UIManager)) {
-            Image imgHelpManual = new ImageIcon("./src/main/resources/icons/manual.png").getImage();
-            Image resizedHelpManual = imgHelpManual.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-            setOpenIcon(new ImageIcon(resizedHelpManual));
-        }
         if ((getTextSelectionColor() instanceof UIResource)) {
             setTextSelectionColor(new Color(227, 227, 227));
         }

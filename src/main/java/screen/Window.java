@@ -108,12 +108,12 @@ public class Window extends JFrame {
         menuItemFileSave.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(154, 154, 154)));
 
         // Menu File - Import File
-        Image imgImportFile = new ImageIcon("./src/main/resources/icons/import.png").getImage();
+        Image imgImportFile = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/import.png")).getImage();
         Image resizedImageImportFile = imgImportFile.getScaledInstance(16, 16,  Image.SCALE_SMOOTH);
         menuImportFile.setIcon(new ImageIcon(resizedImageImportFile));
 
         // Menu File - Export File
-        Image imgExportFile = new ImageIcon("./src/main/resources/icons/export.png").getImage();
+        Image imgExportFile = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/export.png")).getImage();
         Image resizedImageExportFile = imgExportFile.getScaledInstance(16, 16,  Image.SCALE_SMOOTH);
         menuExportFile.setIcon(new ImageIcon(resizedImageExportFile));
 
@@ -122,7 +122,7 @@ public class Window extends JFrame {
 
         // Menu File - Exit
         menuItemFileExit.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(154, 154, 154)));
-        Image imgFileExit = new ImageIcon("./src/main/resources/icons/exit.png").getImage();
+        Image imgFileExit = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/exit.png")).getImage();
         Image resizedImportExit = imgFileExit.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
         menuItemFileExit.setIcon(new ImageIcon(resizedImportExit));
         menuItemFileExit.addActionListener(new MenuItemListen());
@@ -135,17 +135,17 @@ public class Window extends JFrame {
         menuFile.add(menuItemFileExit);
 
         // Menu Edit - Undo
-        Image imgEditUndo = new ImageIcon("./src/main/resources/icons/undo.png").getImage();
+        Image imgEditUndo = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/undo.png")).getImage();
         Image resizedEditUndo = imgEditUndo.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
         menuItemEditUndo.setIcon(new ImageIcon(resizedEditUndo));
 
         // Menu Edit - Redo
-        Image imgEditRedo = new ImageIcon("./src/main/resources/icons/redo.png").getImage();
+        Image imgEditRedo = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/redo.png")).getImage();
         Image resizedEditRedo = imgEditRedo.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
         menuItemEditRedo.setIcon(new ImageIcon(resizedEditRedo));
 
         // Menu Edit - History
-        Image imgEditHistory = new ImageIcon("./src/main/resources/icons/history.png").getImage();
+        Image imgEditHistory = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/history.png")).getImage();
         Image resizedEditHistory = imgEditHistory.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
         menuItemEditHistory.setIcon(new ImageIcon(resizedEditHistory));
         menuItemEditHistory.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(154, 154, 154)));
@@ -170,7 +170,7 @@ public class Window extends JFrame {
         menuArduino.add(menuItemArduinoDisconnect);
 
         // Menu Help - Manual
-        Image imgHelpManual = new ImageIcon("./src/main/resources/icons/manual.png").getImage();
+        Image imgHelpManual = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/manual.png")).getImage();
         Image resizedHelpManual = imgHelpManual.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
         menuItemHelpManual.setIcon(new ImageIcon(resizedHelpManual));
         menuItemHelpManual.setPreferredSize(new Dimension(100, 20));
