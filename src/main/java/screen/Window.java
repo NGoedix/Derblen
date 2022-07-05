@@ -221,6 +221,7 @@ public class Window extends JFrame {
         Arduino.refreshArduinoPorts(menuArduinoConnect, menuItemArduinoDisconnect, menuArduinoConnect.getBackground(), menuArduinoConnect.getForeground());
     }
 
+    // TODO - Change to other file
     public static void main(String[] args) {
         new Window();
     }
