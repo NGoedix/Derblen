@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.plaf.UIResource;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
+import java.util.Objects;
 
 public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
 
@@ -19,7 +20,7 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
 
         Icon icon;
         if (leaf) {
-            Image originalImage = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/import.png")).getImage();
+            Image originalImage = new ImageIcon(Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("icons/cube.png"))).getImage();
             Image resizedImage = originalImage.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
             icon = new ImageIcon(resizedImage);
         } else if (expanded) {

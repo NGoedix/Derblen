@@ -14,15 +14,22 @@ import java.awt.*;
 
 public class Window extends JFrame {
 
+    // Important colors
     private static final Color colorLineMenuBar = new Color(154, 154, 154);
     private static final Color colorBackgroundMenuBar = new Color(82, 82, 82);
 
+    // Main component
     private static JSplitPane splitPaneHorizontalCanvasSplit;
 
+    // Arduino
     private static JMenu menuArduinoConnect;
     private static JMenuItem menuItemArduinoDisconnect;
 
+    // Render class
     private static Render render;
+
+    // Tree List
+    private static CustomJTree objectsTree;
 
     public Window() {
         // Configuration of the JFrame
@@ -87,44 +94,31 @@ public class Window extends JFrame {
         setJMenuBar(menuBar);
 
         // Menu Components
-        JMenu menuFile = new CustomJMenu("File", true);
-        JMenu menuArduino = new CustomJMenu("Arduino", true);
-        menuArduinoConnect = new CustomJMenu("Connect Arduino", false);
-        JMenu menuEdit = new CustomJMenu("Edit", true);
-        JMenu menuHelp = new CustomJMenu("Help", true);
-        JMenu menuImportFile = new CustomJMenu("Import object", false);
-        JMenu menuExportFile = new CustomJMenu("Export object", false);
-        JMenuItem menuItemFileOpen = new CustomJMenuItem("Open");
-        JMenuItem menuItemFileSave = new CustomJMenuItem("Save");
-        JMenuItem menuItemFileImportFile = new CustomJMenuItem("Wavefront (.obj)");
-        JMenuItem menuItemFileExit = new CustomJMenuItem("Exit");
-        JMenuItem menuItemEditUndo = new CustomJMenuItem("Undo");
-        JMenuItem menuItemEditRedo = new CustomJMenuItem("Redo");
-        JMenuItem menuItemEditHistory = new CustomJMenuItem("History");
-        menuItemArduinoDisconnect = new CustomJMenuItem("Disconnect Arduino");
-        JMenuItem menuItemHelpManual = new CustomJMenuItem("Manual");
+        JMenu menuFile = new CustomJMenu("File", true, null);
+        JMenu menuArduino = new CustomJMenu("Arduino", true, null);
+        menuArduinoConnect = new CustomJMenu("Connect Arduino", false, null);
+        JMenu menuEdit = new CustomJMenu("Edit", true, null);
+        JMenu menuHelp = new CustomJMenu("Help", true, null);
+        JMenu menuImportFile = new CustomJMenu("Import object", false, "icons/import.png");
+        JMenu menuExportFile = new CustomJMenu("Export object", false, "icons/export.png");
+        JMenuItem menuItemFileOpen = new CustomJMenuItem("Open", null);
+        JMenuItem menuItemFileSave = new CustomJMenuItem("Save", null);
+        JMenuItem menuItemFileImportFile = new CustomJMenuItem("Wavefront (.obj)", null);
+        JMenuItem menuItemFileExit = new CustomJMenuItem("Exit", "icons/exit.png");
+        JMenuItem menuItemEditUndo = new CustomJMenuItem("Undo", "icons/undo.png");
+        JMenuItem menuItemEditRedo = new CustomJMenuItem("Redo", "icons/redo.png");
+        JMenuItem menuItemEditHistory = new CustomJMenuItem("History", "icons/history.png");
+        menuItemArduinoDisconnect = new CustomJMenuItem("Disconnect Arduino", null);
+        JMenuItem menuItemHelpManual = new CustomJMenuItem("Manual", "icons/manual.png");
 
         // Menu File - Save
         menuItemFileSave.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(154, 154, 154)));
-
-        // Menu File - Import File
-        Image imgImportFile = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/import.png")).getImage();
-        Image resizedImageImportFile = imgImportFile.getScaledInstance(16, 16,  Image.SCALE_SMOOTH);
-        menuImportFile.setIcon(new ImageIcon(resizedImageImportFile));
-
-        // Menu File - Export File
-        Image imgExportFile = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/export.png")).getImage();
-        Image resizedImageExportFile = imgExportFile.getScaledInstance(16, 16,  Image.SCALE_SMOOTH);
-        menuExportFile.setIcon(new ImageIcon(resizedImageExportFile));
 
         // Menu File - Import File
         menuImportFile.add(menuItemFileImportFile);
 
         // Menu File - Exit
         menuItemFileExit.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(154, 154, 154)));
-        Image imgFileExit = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/exit.png")).getImage();
-        Image resizedImportExit = imgFileExit.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-        menuItemFileExit.setIcon(new ImageIcon(resizedImportExit));
         menuItemFileExit.addActionListener(new MenuItemListen());
 
         // Menu File
@@ -134,20 +128,7 @@ public class Window extends JFrame {
         menuFile.add(menuExportFile);
         menuFile.add(menuItemFileExit);
 
-        // Menu Edit - Undo
-        Image imgEditUndo = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/undo.png")).getImage();
-        Image resizedEditUndo = imgEditUndo.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-        menuItemEditUndo.setIcon(new ImageIcon(resizedEditUndo));
-
-        // Menu Edit - Redo
-        Image imgEditRedo = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/redo.png")).getImage();
-        Image resizedEditRedo = imgEditRedo.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-        menuItemEditRedo.setIcon(new ImageIcon(resizedEditRedo));
-
         // Menu Edit - History
-        Image imgEditHistory = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/history.png")).getImage();
-        Image resizedEditHistory = imgEditHistory.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-        menuItemEditHistory.setIcon(new ImageIcon(resizedEditHistory));
         menuItemEditHistory.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(154, 154, 154)));
 
         // Menu Edit
@@ -170,9 +151,6 @@ public class Window extends JFrame {
         menuArduino.add(menuItemArduinoDisconnect);
 
         // Menu Help - Manual
-        Image imgHelpManual = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icons/manual.png")).getImage();
-        Image resizedHelpManual = imgHelpManual.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-        menuItemHelpManual.setIcon(new ImageIcon(resizedHelpManual));
         menuItemHelpManual.setPreferredSize(new Dimension(100, 20));
 
         // Menu Help
@@ -193,7 +171,7 @@ public class Window extends JFrame {
         // Components
         splitPaneHorizontalCanvasSplit = new CustomJSplitPane();
         JSplitPane splitPaneVerticalPanelPanel = new CustomJSplitPane();
-        JTree objectsTree = new CustomJTree();
+        objectsTree = new CustomJTree();
         JScrollPane scrollPaneTree = new JScrollPane(objectsTree);
         render = new Render();
 
@@ -212,13 +190,27 @@ public class Window extends JFrame {
     }
 
     public static void resizeComponents(int width, int height) {
+        // Resize main Component
         splitPaneHorizontalCanvasSplit.setSize(new Dimension(width, height));
         splitPaneHorizontalCanvasSplit.setDividerLocation(width - 250);
     }
 
     public static void menuRefreshArduino() {
+        // Remove ports and get ports
         menuArduinoConnect.removeAll();
         Arduino.refreshArduinoPorts(menuArduinoConnect, menuItemArduinoDisconnect, menuArduinoConnect.getBackground(), menuArduinoConnect.getForeground());
+    }
+
+    public static double getCanvasWidth() {
+        return splitPaneHorizontalCanvasSplit.getDividerLocation() - splitPaneHorizontalCanvasSplit.getDividerSize();
+    }
+
+    public static double getCanvasHeight() {
+        return splitPaneHorizontalCanvasSplit.getSize().getHeight();
+    }
+
+    public static CustomJTree getObjectsTree() {
+        return objectsTree;
     }
 
     public static void main(String[] args) {
